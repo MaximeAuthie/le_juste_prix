@@ -1,6 +1,7 @@
 // Récupération des éléments du DOM
 let input                   = document.body.querySelector('#price');
-let button                  = document.body.querySelector('button');
+let buttonTester            = document.body.querySelector('#tester');
+let buttonRecommencer       = document.body.querySelector('#recommencer');
 let instructionsDiv         = document.body.querySelector('#instructions');
 let errorMsg                = document.body.querySelector('#error');
 
@@ -24,11 +25,13 @@ function verify (number) {
         tryNumner += 1;
         instruction.textContent = "Essai " + tryNumner + " (" + number +") : C'est plus!";
         instruction.className = "instruction-more";
+        input.value='';
         instructionsDiv.prepend(instruction);
     } else if (number > randomNumber && number < 1000) {
         tryNumner += 1;
         instruction.textContent = "Essai " + tryNumner + " (" + number +") : C'est moins!";
         instruction.className = "instruction-less";
+        input.value='';
         instructionsDiv.prepend(instruction);
     } else if (number < 0) {
         errorMsg.style.display = 'block';
@@ -42,7 +45,7 @@ function verify (number) {
         instruction.className = "instruction-success";
         instructionsDiv.prepend(instruction);
         input.disabled =true;
-        button.disabled=true;
+        buttonTester.disabled=true;
     }
 }
 
@@ -58,8 +61,7 @@ input.addEventListener('keyup', () => {
 });
 
 // Gérer l'envoie du formulaire
-
-button.addEventListener('click', (event) => {
+buttonTester.addEventListener('click', (event) => {
     event.preventDefault();
     if (isNaN(input.value) || input.value == '') {
         errorMsg.style.display = 'block';
@@ -70,5 +72,19 @@ button.addEventListener('click', (event) => {
 });
 
 
-//insérer un bouton "recommencer" et coder la fonction qui va avec
-//gérer l'affichage responsive
+// Création de la fonction permettant de réinitialiser le jeu
+function retry () {
+    randomNumber = Math.floor(Math.random()*1000);
+    input.value='';
+    input.disabled =false;
+    buttonTester.disabled=false;
+    instructionsDiv.innerHTML='';
+}
+
+// Gérer le click sur le bouton "recommencer"
+buttonRecommencer.addEventListener('click', (event) => {
+    event.preventDefault();
+    retry();
+});
+
+// Ajouter la gestion des bornes min et max

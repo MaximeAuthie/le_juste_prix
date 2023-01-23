@@ -14,11 +14,16 @@
     <div id="container">
         <h1>Bienvenue au juste prix !</h1>
         <form>
-            <input id="price" placeholder="Devinez le prix! (entre 1 et 1000€)">
+            <input id="price" placeholder="Devinez le prix! (entre 1 et 1000€)" autofocus>
             <p id="error">Veuillez saisir un nombre entre 1 et 1000.</p>
-            <button type="submit">
-                <span>Tester</span>
-             </button>
+            <div>
+                <button type="submit" id='tester'>
+                    <span>Tester</span>
+                </button>
+                <button type="submit" id="recommencer">
+                    <span>Recommencer</span>
+                </button>
+            </div>
         </form>
     </div>
     <div id="instructions">
